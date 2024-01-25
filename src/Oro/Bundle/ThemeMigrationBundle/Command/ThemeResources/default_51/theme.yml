@@ -1,0 +1,4 @@
+label:  Default 5.1 Theme
+description: Default theme version 5.1
+resolve_extra_paths:
+    - '/bundles/orothemedefault51'
