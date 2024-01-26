@@ -1,0 +1,2 @@
+bundles:
+    - { name: Oro\Bundle\ThemeMigrationBundle\OroThemeMigrationBundle, priority: 255 }
