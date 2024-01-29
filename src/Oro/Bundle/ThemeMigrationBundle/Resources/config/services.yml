@@ -1,0 +1,48 @@
+services:
+    oro_theme_migration.command.theme_migration:
+        class: Oro\Bundle\ThemeMigrationBundle\Command\ThemeMigrationCommand
+        public: false
+        arguments:
+            - '@oro_layout.theme_extension.resource_provider.theme'
+            - '@oro_theme_migration.util.theme_extract_path_config'
+            - '@oro_theme_migration.util.theme_extract_file_system_utils'
+            - '@oro_theme_migration.parser.theme_extract_file_parser'
+            - '@oro_theme_migration.util.theme_extract_bundle_utils'
+            - '@oro_theme_migration.parser.datagrid_migration_file_parser'
+        tags:
+            - { name: console.command, command: 'oro:theme:migrate' }
+
+    oro_theme_migration.util.theme_extract_path_config:
+        class: Oro\Bundle\ThemeMigrationBundle\Util\ThemeExtractPathConfig
+        public: false
+
+    oro_theme_migration.parser.theme_extract_file_parser:
+        class: Oro\Bundle\ThemeMigrationBundle\Parser\ThemeExtractFileParser
+        public: false
+        arguments:
+            - '@oro_theme_migration.util.theme_extract_path_config'
+            - '@oro_theme_migration.util.theme_extract_bundle_utils'
+            - '@oro_theme_migration.util.theme_extract_file_system_utils'
+            - '@oro_theme_migration.util.theme_extract_array_utils'
+
+    oro_theme_migration.parser.datagrid_migration_file_parser:
+        class: Oro\Bundle\ThemeMigrationBundle\Parser\DatagridMigrationFileParser
+        arguments:
+            - '@oro_theme_migration.util.theme_extract_path_config'
+            - '@oro_theme_migration.util.theme_extract_file_system_utils'
+            - !abstract '$gridsToMigrate defined in Oro\Bundle\ThemeMigrationBundle\DependencyInjection\Compiler\ThemeMigrationPass'
+
+    oro_theme_migration.util.theme_extract_bundle_utils:
+        class: Oro\Bundle\ThemeMigrationBundle\Util\ThemeExtractBundleUtils
+        public: false
+
+    oro_theme_migration.util.theme_extract_file_system_utils:
+        class: Oro\Bundle\ThemeMigrationBundle\Util\ThemeExtractFileSystemUtils
+        public: false
+        arguments:
+            - '@oro_theme_migration.util.theme_extract_path_config'
+            - '@oro_theme_migration.util.theme_extract_bundle_utils'
+
+    oro_theme_migration.util.theme_extract_array_utils:
+        class: Oro\Bundle\ThemeMigrationBundle\Util\ThemeExtractArrayUtils
+        public: false

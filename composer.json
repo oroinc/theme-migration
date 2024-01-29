@@ -1,0 +1,35 @@
+{
+    "name": "oro/theme-migration",
+    "description": "Oro Theme Migration Bundle",
+    "type": "symfony-bundle",
+    "keywords": ["Oro", "Theme"],
+    "homepage": "https://github.com/oroinc/theme",
+    "license": "Commercial",
+    "authors": [
+        {
+            "name": "Oro, Inc",
+            "homepage": "http://oroinc.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Oro\\Bundle\\ThemeMigrationBundle\\": "src/Oro/Bundle/ThemeMigrationBundle"
+        },
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "require": {
+    },
+    "repositories": {
+        "oro": {
+            "type": "composer",
+            "url": "https://packagist.orocrm.com"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "6.0-dev"
+        }
+    }
+}
