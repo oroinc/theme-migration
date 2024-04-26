@@ -3,8 +3,11 @@
 This bundle includes a command designed to extract all layout files associated with the `default` theme from the application into a single theme migration bundle. 
 This facilitates the reuse of the theme in OroCommerce 6.0, minimizing the need for extensive theme modifications during the upgrade process.	
 
-To initiate the theme extraction and migration, execute the following commands:
+### To initiate the theme extraction and migration:
 
+1. Check out the old version of the application (XX represents the old version of the app)
+
+2. Execute the following commands:
 ```shell
 rm -rf public/bundles
 php bin/console assets:install
@@ -12,6 +15,46 @@ php bin/console oro:theme:migrate
 ```
 The extraction process is based on the following logic:
 
+3. Copy `OroThemeDefaultXXBundle` from the old version of the application to the new one
+
+4. Check out the new version of the application
+
+5. Enable the new theme by editing the `config.yml` file
+```yaml
+...
+oro_layout:
+    enabled_themes:
+        - default_XX
+...
+```
+
+6. Update the `theme.yml` file of the custom theme
+```yaml
+...
+parent: default_XX
+...
+resolve_extra_paths:
+  - /bundles/orothemedefaultXX
+...
+```
+
+7. Manually move the custom storefront datagrids from 
+`<AnyBundle>/Resources/config/oro/datagrids.yml` to 
+`<AnyBundle>/Resources/views/layouts/<themeid>/config/datagrids.yml`
+
+8. Remove old caches. E.g.
+```shell
+rm -rf var/cache/prod/
+```
+
+9. Publish the new files into the public folder
+```shell
+oro:assets:install (--symlink)
+```
+
+-----
+
+### The extraction process follows this logic:
 - Dump the assets into the `public/bundles` folder to enable their reuse during the theme migration.
 - Create a new `OroThemeDefaultXXBundle`, where XX represents the current version of the application.
 - Clear out the `Resources/views` and `Resources/public` folders (if they exist) in `OroThemeDefaultXXBundle`.
