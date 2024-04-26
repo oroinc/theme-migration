@@ -48,10 +48,6 @@ class ThemeExtractBundleUtils
     {
         $mapping = $this->getKernelBundleMapping();
         foreach ($mapping as $bundleName => $bundleFullPath) {
-            // skip non-app bundles
-            if (str_contains($bundleFullPath, '/vendor/') && !str_contains($bundleFullPath, 'vendor/oro/')) {
-                continue;
-            }
             $this->bundlePathMapping[$bundleName] = $bundleFullPath;
         }
 

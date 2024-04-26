@@ -18,6 +18,7 @@
         "exclude-from-classmap": ["/Tests/"]
     },
     "require": {
+        "oro/platform": "~5.0.18"
     },
     "repositories": {
         "oro": {
