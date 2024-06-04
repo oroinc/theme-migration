@@ -1,0 +1,4 @@
+label:  Default 6.0 Theme
+description: Default theme version 6.0
+resolve_extra_paths:
+    - '/bundles/orothemedefault60'

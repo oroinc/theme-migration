@@ -14,8 +14,6 @@ use Symfony\Component\Yaml\Yaml;
  */
 class DatagridMigrationFileParser
 {
-    private const GRID_FILE_PATH = 'Resources/config/oro/datagrids.yml';
-
     public function __construct(
         private readonly ThemeExtractPathConfig $pathConfig,
         private readonly ThemeExtractFileSystemUtils $fsUtils,
@@ -26,7 +24,10 @@ class DatagridMigrationFileParser
     public function migrateGrids(string $themeId): string
     {
         $resourcesContainer = new ResourcesContainer();
-        $cumulativeConfigLoader = CumulativeConfigLoaderFactory::create('grid', self::GRID_FILE_PATH);
+        $cumulativeConfigLoader = CumulativeConfigLoaderFactory::create(
+            'grid',
+            'Resources/views/layouts/' . $themeId . '/config/datagrids.yml'
+        );
         $resources = $cumulativeConfigLoader->load($resourcesContainer);
         $gridConfig = [];
         foreach ($resources as $resource) {
