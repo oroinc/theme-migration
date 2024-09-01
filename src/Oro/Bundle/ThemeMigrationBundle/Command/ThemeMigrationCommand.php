@@ -87,13 +87,13 @@ class ThemeMigrationCommand extends Command
             $this->io->info('New datagrid file was generated at ' . $targetGridPath);
         }
 
-        $resources = $this->themeResourceProvider->loadAndGetConfig(new ResourcesContainer());
+        $resources = $this->themeResourceProvider->loadConfig(new ResourcesContainer());
         $this->extractTheme($resources, $themeIdHierarchy, $this->pathConfig::DEFAULT_THEME_ID);
 
         if ($this->io->isVeryVerbose() && $this->fsUtils->getFileLog()) {
             $this->io->info('Following file actions were performed:');
             foreach ($this->fsUtils->getFileLog() as $action => $logs) {
-                $this->io->section(strtoupper($action) . ": ");
+                $this->io->section(strtoupper($action) . ': ');
                 foreach ($logs as $key => $log) {
                     if (is_string($key)) {
                         $this->io->writeln('⌈' . $key);
