@@ -90,7 +90,7 @@ class ThemeExtractPathConfig
         return sprintf(static::LAYOUT_FOLDER_PATTERN, $themeId);
     }
 
-    public function getWithBundlePath(string $pathToAppend = null): string
+    public function getWithBundlePath(?string $pathToAppend = null): string
     {
         $pathToAppend = $pathToAppend ? '/' . $pathToAppend : '';
 
@@ -130,7 +130,7 @@ class ThemeExtractPathConfig
     public function getBundlePathWithSourceLayoutPattern(
         string $bundlePath,
         string $filePath,
-        string $themeId = null
+        ?string $themeId = null
     ): string {
         return $bundlePath . '/' . $this->getSearchFolderPattern($themeId) . '/' . $filePath;
     }
@@ -142,7 +142,7 @@ class ThemeExtractPathConfig
         return $prefix . $path;
     }
 
-    public function getNewThemeAssetFullPath(string $targetPath = null): string
+    public function getNewThemeAssetFullPath(?string $targetPath = null): string
     {
         $targetPath = $targetPath ? '/' . $targetPath : '';
 
@@ -159,7 +159,7 @@ class ThemeExtractPathConfig
         );
     }
 
-    public function getBundledFullPath(string $bundlePath, string $themeId, string $filePattern = null): string
+    public function getBundledFullPath(string $bundlePath, string $themeId, ?string $filePattern = null): string
     {
         $filePattern = $filePattern ? '/' . $filePattern : '';
 
