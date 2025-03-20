@@ -27,6 +27,7 @@ class ThemeExtractFileParser
     /**
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function parseFile(
         string $sourceFullPath,
@@ -103,7 +104,16 @@ class ThemeExtractFileParser
                             $sourceFullPath,
                             $themeId
                         );
-                    $fileContent = str_replace($subReference, $newSubReferencePath, $fileContent);
+                    // Find and replace the first occurrence of $subReference in $fileContent
+                    $offset = mb_strpos($fileContent, $subReference);
+                    if (false !== $offset) {
+                        $fileContent = substr_replace(
+                            $fileContent,
+                            $newSubReferencePath,
+                            $offset,
+                            mb_strlen($subReference)
+                        );
+                    }
 
                     $this->parseFile($subReferenceFullPath, $newSubReferenceFullPath, $fileConfig, $themeId);
                 }
